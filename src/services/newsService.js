@@ -1,26 +1,108 @@
-// 这里不需要 "use strict"; 因为Node.js默认就是严格模式
+import axios from "axios";
 
-// 移除 exports 和 __esModule 的相关代码
-const getNewsData = (source, regions, date) => {
-    // 这里是模拟的数据，实际中你需要从数据库或其他数据源获取
-    const newsList = [
-        {
-            region: 'US',
-            language: 'en',
-            source: source,
-            pushTitle: 'Sample Title',
-            pushSubTitle: 'Sample Subtitle',
-            pushBannerUrl: 'https://example.com/sample - image.jpg',
-            newsId: '12345',
-            newsTag: 'tag1',
-            newsTitle: 'Sample News Title',
-            newsUrl: 'https://example.com/sample - news',
-            newsPublishTime: Date.now(),
-            newsContentType: 1,
-            newsType: 0
-        }
-    ];
-    return newsList;
+const getNewsData = async (source, regions, date) => {
+  const apiKey = "3f86e4f486f744261a8cb01ff3c8731861234b63";
+  const apiUrl =
+    "https://api.taboola.com/2.0/json/oppo-browser-thailand/recommendations.get";
+
+  const body = {
+    placements: [
+      {
+        name: "Editorial Travel",
+        recCount: "1",
+        organicType: "MIX",
+      },
+      {
+        name: "Editorial Trending",
+        recCount: "1",
+        organicType: "MIX",
+      },
+      {
+        name: "Editorial News",
+        recCount: "1",
+        organicType: "MIX",
+      },
+      {
+        name: "Editorial Sports",
+        recCount: "1",
+        organicType: "MIX",
+      },
+      {
+        name: "Editorial Entertainment",
+        recCount: "1",
+        organicType: "MIX",
+      },
+      {
+        name: "Editorial Lifestyle",
+        recCount: "1",
+        organicType: "MIX",
+      },
+      {
+        name: "Editorial Tech",
+        recCount: "1",
+        organicType: "MIX",
+      },
+      {
+        name: "Editorial Politics",
+        recCount: "1",
+        organicType: "MIX",
+      },
+      {
+        name: "Editorial Business",
+        recCount: "1",
+        organicType: "MIX",
+      },
+      {
+        name: "Editorial Health",
+        recCount: "1",
+        organicType: "MIX",
+      },
+      {
+        name: "Editorial Autos",
+        recCount: "1",
+        organicType: "MIX",
+      },
+      {
+        name: "Editorial Environment",
+        recCount: "1",
+        organicType: "MIX",
+      },
+      {
+        name: "Editorial Food",
+        recCount: "1",
+        organicType: "MIX",
+      },
+    ],
+    user: {
+      session: "init",
+      realip: "2.255.252.23",
+      agent: "oppo - push",
+      device: "2.255.252.23",
+    },
+    app: {
+      type: "mobile",
+      apiKey,
+      origin: "SERVER",
+      consent: {},
+    },
+    source: {
+      type: "text",
+      id: "oppo - push",
+      url: "oppo - push",
+    },
+  };
+
+  try {
+    const response = await axios.post(apiUrl, body, {
+      headers: {
+        "Content - Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data from Taboola API:", error);
+    throw error;
+  }
 };
 
 export default getNewsData;
