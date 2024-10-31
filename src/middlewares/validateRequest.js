@@ -1,12 +1,9 @@
-const newsService = require("../services/newsService.js");
 const generateSignature = require("../utils/signatureUtils.js");
 const express = require("express");
 
 const router = express.Router();
 
-// 合并后的中间件函数
 const validateRequest = (req, res, next) => {
-  // 验证请求头的Content - Type
   if (req.headers["content-type"] !== "application/json") {
     res.status(400).json({
       code: "400",
@@ -35,7 +32,6 @@ const validateRequest = (req, res, next) => {
   }
 
   const requestBody = req.body;
-  // 验证source是否为"Taboola"
   if (requestBody.source !== "Taboola") {
     res.status(400).json({
       code: "400",
@@ -64,14 +60,12 @@ const validateRequest = (req, res, next) => {
     return;
   }
 
-  // 生成签名
   const signature = generateSignature(
     requestBody.source,
     requestBody.regions,
     requestBody.date
   );
 
-  // 假设请求体中带有签名，这里验证签名
   if (requestBody.signature !== signature) {
     res.status(400).json({
       code: "400",
@@ -83,24 +77,4 @@ const validateRequest = (req, res, next) => {
   next();
 };
 
-router.post("/push/api/news/query", validateRequest, async (req, res) => {
-  try {
-    const newsData = await newsService.getNewsData(
-      req.body.regions,
-      req.body.date
-    );
-    res.json({
-      code: "200",
-      msg: "Success",
-      data: newsData,
-    });
-  } catch (error) {
-    res.status(500).json({
-      code: "500",
-      msg: "Internal Server Error",
-      error: error.message,
-    });
-  }
-});
-
-module.exports = router;
+module.exports = validateRequest;
