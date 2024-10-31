@@ -6,6 +6,7 @@ module.exports = {
     MY: "https://api.taboola.com/2.0/json/oppo-browser-malaysia-push",
     PH: "https://api.taboola.com/2.0/json/oppo-browser-philippine-push",
     TH: "https://api.taboola.com/2.0/json/oppo-browser-thailand-push",
+    FALLBACK: "https://api.taboola.com/2.0/json/oppo-browser-fallback-push",
   },
   apiSecret: "bbdedea82872c8c2f24ca23a64a159dc",
   apiKey: "8f5JoVbbi50CkcgC0gG88Wo0S",

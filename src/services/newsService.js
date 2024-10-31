@@ -44,7 +44,7 @@ const getNewsData = async (regions, date) => {
       }
     }
     if (!apiUrl) {
-      throw new Error("Invalid region code");
+      apiUrl = apiUrls.FALLBACK;
     }
     const response = await axios.post(apiUrl, body, {
       headers: {

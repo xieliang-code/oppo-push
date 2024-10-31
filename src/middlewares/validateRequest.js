@@ -1,7 +1,4 @@
 const generateSignature = require("../utils/signatureUtils.js");
-const express = require("express");
-
-const router = express.Router();
 
 const validateRequest = (req, res, next) => {
   if (req.headers["content-type"] !== "application/json") {
