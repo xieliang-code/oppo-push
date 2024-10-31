@@ -18,9 +18,8 @@ const validateRequest = (req, res, next) => {
     });
     return;
   }
-
-  const requestId = req.headers["requestId"];
-  if (!requestId) {
+  const requestid = req.headers["requestid"];
+  if (!requestid) {
     res.status(400).json({
       code: "400",
       msg: "Missing requestId",
