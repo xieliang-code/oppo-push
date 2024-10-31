@@ -6,6 +6,4 @@ function generateSignature(source, regions, date) {
   const stringToSign = `${apiSecret}${source}${regions}${date}`;
   return crypto.createHash("md5").update(stringToSign).digest("hex");
 }
-module.exports = {
-  generateSignature: generateSignature,
-};
+module.exports = generateSignature;
