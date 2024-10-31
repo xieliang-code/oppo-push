@@ -7,10 +7,11 @@ router.post("/push/api/news/query", (req, res) => {
   if (req.headers["content-type"] !== "application/json") {
     res.status(400).json({
       code: "400",
-      msg: "Invalid Content - Type",
+      msg: "Invalid Content-Type",
     });
     return;
   }
+
   const requestBody = req.body;
   // 在这里进行参数的验证和业务逻辑处理，例如验证签名是否正确等操作
   const newsData = newsService.getNewsData(

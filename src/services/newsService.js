@@ -1,74 +1,16 @@
 import axios from "axios";
+import { countryCodes, apiUrls, apiKey } from "./constants.js";
 
 const getNewsData = async (source, regions, date) => {
-  const apiKey = "3f86e4f486f744261a8cb01ff3c8731861234b63";
-  const apiUrl =
-    "https://api.taboola.com/2.0/json/oppo-browser-thailand/recommendations.get";
-
   const body = {
     placements: [
       {
-        name: "Editorial Travel",
+        name: "Editorial Trending 01",
         recCount: "1",
         organicType: "MIX",
       },
       {
-        name: "Editorial Trending",
-        recCount: "1",
-        organicType: "MIX",
-      },
-      {
-        name: "Editorial News",
-        recCount: "1",
-        organicType: "MIX",
-      },
-      {
-        name: "Editorial Sports",
-        recCount: "1",
-        organicType: "MIX",
-      },
-      {
-        name: "Editorial Entertainment",
-        recCount: "1",
-        organicType: "MIX",
-      },
-      {
-        name: "Editorial Lifestyle",
-        recCount: "1",
-        organicType: "MIX",
-      },
-      {
-        name: "Editorial Tech",
-        recCount: "1",
-        organicType: "MIX",
-      },
-      {
-        name: "Editorial Politics",
-        recCount: "1",
-        organicType: "MIX",
-      },
-      {
-        name: "Editorial Business",
-        recCount: "1",
-        organicType: "MIX",
-      },
-      {
-        name: "Editorial Health",
-        recCount: "1",
-        organicType: "MIX",
-      },
-      {
-        name: "Editorial Autos",
-        recCount: "1",
-        organicType: "MIX",
-      },
-      {
-        name: "Editorial Environment",
-        recCount: "1",
-        organicType: "MIX",
-      },
-      {
-        name: "Editorial Food",
+        name: "Editorial Breaking News",
         recCount: "1",
         organicType: "MIX",
       },
@@ -76,7 +18,7 @@ const getNewsData = async (source, regions, date) => {
     user: {
       session: "init",
       realip: "2.255.252.23",
-      agent: "oppo - push",
+      agent: "oppo-push",
       device: "2.255.252.23",
     },
     app: {
@@ -87,15 +29,25 @@ const getNewsData = async (source, regions, date) => {
     },
     source: {
       type: "text",
-      id: "oppo - push",
-      url: "oppo - push",
+      id: "oppo-push",
+      url: "oppo-push",
     },
   };
 
   try {
+    let apiUrl;
+    for (let region of regions) {
+      if (countryCodes.includes(region)) {
+        apiUrl = apiUrls[region];
+        break;
+      }
+    }
+    if (!apiUrl) {
+      throw new Error("Invalid region code");
+    }
     const response = await axios.post(apiUrl, body, {
       headers: {
-        "Content - Type": "application/json",
+        "Content-Type": "application/json",
       },
     });
     return response.data;
