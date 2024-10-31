@@ -1,6 +1,6 @@
 const axios = require("axios");
-const constants = require("../constants");
-const { countryCodes, apiUrls, apiKey } = constants;
+const constants = require("../config");
+const { countryCodes, apiUrls } = constants;
 
 const getNewsData = async (regions, date) => {
   const body = {
@@ -19,19 +19,19 @@ const getNewsData = async (regions, date) => {
     user: {
       session: "init",
       realip: "2.255.252.23",
-      agent: "oppo - push",
+      agent: "oppo-push",
       device: "2.255.252.23",
     },
     app: {
       type: "mobile",
-      apiKey,
+      apiKey: "3f86e4f486f744261a8cb01ff3c8731861234b63",
       origin: "SERVER",
       consent: {},
     },
     source: {
       type: "text",
-      id: "oppo - push",
-      url: "oppo - push",
+      id: "oppo-push",
+      url: "oppo-push",
     },
   };
 
@@ -48,7 +48,7 @@ const getNewsData = async (regions, date) => {
     }
     const response = await axios.post(apiUrl, body, {
       headers: {
-        "Content - Type": "application/json",
+        "Content-Type": "application/json",
       },
     });
     return response.data;

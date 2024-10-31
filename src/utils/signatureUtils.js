@@ -1,5 +1,5 @@
 const crypto = require("crypto");
-const constants = require("../constants");
+const constants = require("../config");
 const apiSecret = constants.apiSecret;
 
 function generateSignature(source, regions, date) {

@@ -8,5 +8,5 @@ module.exports = {
     TH: "https://api.taboola.com/2.0/json/oppo-browser-thailand-push",
   },
   apiSecret: "bbdedea82872c8c2f24ca23a64a159dc",
-  apiKey: "3f86e4f486f744261a8cb01ff3c8731861234b63",
+  apiKey: "8f5JoVbbi50CkcgC0gG88Wo0S",
 };
