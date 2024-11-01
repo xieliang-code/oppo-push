@@ -1,7 +1,9 @@
 const generateSignature = require("../utils/signatureUtils.js");
+const { errorLogger } = require("../utils/logger");
 
 const validateRequest = (req, res, next) => {
   if (req.headers["content-type"] !== "application/json") {
+    errorLogger.error("Invalid Content-Type.");
     res.status(400).json({
       code: "400",
       msg: "Invalid Content-Type",
@@ -12,6 +14,7 @@ const validateRequest = (req, res, next) => {
   const apiKey = req.headers["apikey"];
   const validApiKey = "8f5JoVbbi50CkcgC0gG88Wo0S";
   if (apiKey !== validApiKey) {
+    errorLogger.error("Invalid API key.");
     res.status(400).json({
       code: "400",
       msg: "Invalid API key",
@@ -20,6 +23,7 @@ const validateRequest = (req, res, next) => {
   }
   const requestid = req.headers["requestid"];
   if (requestid !== "36eu298d10a00") {
+    errorLogger.error("Invalid requestId.");
     res.status(400).json({
       code: "400",
       msg: "Missing requestId",
@@ -29,6 +33,7 @@ const validateRequest = (req, res, next) => {
 
   const requestBody = req.body;
   if (requestBody.source !== "Taboola") {
+    errorLogger.error("Invalid source.");
     res.status(400).json({
       code: "400",
       msg: "Invalid source",
@@ -38,8 +43,11 @@ const validateRequest = (req, res, next) => {
 
   if (
     !Array.isArray(requestBody.regions) ||
-    requestBody.regions.some((region) => typeof region !== "string")
+    requestBody.regions.some(
+      (region) => typeof region !== "string" || region === ""
+    )
   ) {
+    errorLogger.error("Invalid regions format.");
     res.status(400).json({
       code: "400",
       msg: "Invalid regions format",
@@ -49,6 +57,7 @@ const validateRequest = (req, res, next) => {
 
   const date = requestBody.date;
   if (isNaN(date) || !Number.isInteger(date)) {
+    errorLogger.error("Invalid date format.");
     res.status(400).json({
       code: "400",
       msg: "Invalid date format",
@@ -63,6 +72,7 @@ const validateRequest = (req, res, next) => {
   );
 
   if (requestBody.signature !== signature) {
+    errorLogger.error("Invalid signature.");
     res.status(400).json({
       code: "400",
       msg: "Invalid signature",

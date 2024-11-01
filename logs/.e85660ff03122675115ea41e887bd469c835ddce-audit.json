@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "logs/.e85660ff03122675115ea41e887bd469c835ddce-audit.json",
+    "files": [
+        {
+            "date": 1730465022662,
+            "name": "logs/news-api-fallback-2024-11-01.log",
+            "hash": "f2263c29b3c6f315cd75c596f400e66de9eb24002c18f3b7ca429c955a52866d"
+        }
+    ],
+    "hashType": "sha256"
+}
