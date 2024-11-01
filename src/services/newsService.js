@@ -42,27 +42,29 @@ const getNewsData = async (regions, date) => {
 
   const responses = await Promise.all(
     regions.map(async (region) => {
+      let apiUrl = apiUrls[region];
       if (countryCodes.includes(region)) {
-        let apiUrl = apiUrls[region];
         if (!apiUrl) {
           apiUrl = apiUrls.FALLBACK;
           fallbackLogger.warn(`Region: ${region} is using fallback API URL.`);
         }
-        try {
-          const response = await axios.post(apiUrl, body, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
-          return { response, region };
-        } catch (error) {
-          errorLogger.error(
-            `Error fetching data from API for region: ${region}. Date: ${date}`,
-            error
-          );
-          return null;
-        }
       } else {
+        apiUrl = apiUrls.FALLBACK;
+        fallbackLogger.warn(`Region: ${region} is using fallback API URL.`);
+      }
+
+      try {
+        const response = await axios.post(apiUrl, body, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        return { response, region };
+      } catch (error) {
+        errorLogger.error(
+          `Error fetching data from API for region: ${region}. Date: ${date}`,
+          error
+        );
         return null;
       }
     })
