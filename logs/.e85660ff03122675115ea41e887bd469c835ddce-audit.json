@@ -1,7 +1,7 @@
 {
     "keep": {
         "days": true,
-        "amount": 14
+        "amount": 1
     },
     "auditLog": "logs/.e85660ff03122675115ea41e887bd469c835ddce-audit.json",
     "files": [
