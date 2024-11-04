@@ -13,7 +13,7 @@ const successLogger = winston.createLogger({
       datePattern: "YYYY-MM-DD",
       zippedArchive: true,
       maxSize: "20m",
-      maxFiles: "14d",
+      maxFiles: "1d",
     }),
   ],
 });
@@ -30,7 +30,7 @@ const errorLogger = winston.createLogger({
       datePattern: "YYYY-MM-DD",
       zippedArchive: true,
       maxSize: "20m",
-      maxFiles: "14d",
+      maxFiles: "7d",
     }),
   ],
 });
@@ -47,7 +47,7 @@ const infoLogger = winston.createLogger({
       datePattern: "YYYY-MM-DD",
       zippedArchive: true,
       maxSize: "20m",
-      maxFiles: "14d",
+      maxFiles: "1d",
     }),
   ],
 });
@@ -64,7 +64,7 @@ const fallbackLogger = winston.createLogger({
       datePattern: "YYYY-MM-DD",
       zippedArchive: true,
       maxSize: "20m",
-      maxFiles: "14d",
+      maxFiles: "1d",
     }),
   ],
 });
@@ -81,7 +81,7 @@ const emptyListLogger = winston.createLogger({
       datePattern: "YYYY-MM-DD",
       zippedArchive: true,
       maxSize: "20m",
-      maxFiles: "14d",
+      maxFiles: "7d",
     }),
   ],
 });
@@ -98,7 +98,7 @@ const requestLogger = winston.createLogger({
       datePattern: "YYYY-MM-DD",
       zippedArchive: true,
       maxSize: "20m",
-      maxFiles: "14d",
+      maxFiles: "1d",
     }),
   ],
 });
