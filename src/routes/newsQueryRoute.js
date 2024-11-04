@@ -9,7 +9,9 @@ router.post("/push/api/news/query", validateRequest, async (req, res) => {
   try {
     const newsData = await getNewsData(req.body.regions, req.body.date);
     if (newsData === undefined) {
-      errorLogger.error(`Failed to retrieve news data. Date: ${req.body.date}. Regions: [${req.body.regions}]`);
+      errorLogger.error(
+        `Failed to retrieve news data. Date: ${req.body.date}. Regions: [${req.body.regions}]`
+      );
       res.status(500).json({
         code: "500",
         msg: "Internal Server Error",
@@ -17,7 +19,11 @@ router.post("/push/api/news/query", validateRequest, async (req, res) => {
       });
     } else {
       successLogger.info(
-        `Successfully retrieved news data. Date: ${req.body.date}. Regions: [${req.body.regions}]`
+        `
+        Successfully retrieved news data. Date: ${req.body.date}. 
+        Regions: [${req.body.regions}]. 
+        News Data: ${JSON.stringify(newsData)}
+        `
       );
       res.json({
         code: "200",

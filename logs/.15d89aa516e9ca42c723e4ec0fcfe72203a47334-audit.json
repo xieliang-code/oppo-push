@@ -1,7 +1,7 @@
 {
     "keep": {
         "days": true,
-        "amount": 1
+        "amount": 14
     },
     "auditLog": "logs/.15d89aa516e9ca42c723e4ec0fcfe72203a47334-audit.json",
     "files": [
@@ -9,6 +9,11 @@
             "date": 1730461018270,
             "name": "logs/news-api-success-2024-11-01.log",
             "hash": "b31e7c490a40887de93493e84b25ca8cef60dc6b5266680a0292d79354ac1f49"
+        },
+        {
+            "date": 1730692406865,
+            "name": "logs/news-api-success-2024-11-04.log",
+            "hash": "5f1cd261cfc62af96b57ee9155e623f61fd0489f5d252835e0d6269dfd029d84"
         }
     ],
     "hashType": "sha256"
