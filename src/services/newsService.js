@@ -45,12 +45,12 @@ const getNewsData = async (regions, date) => {
       let apiUrl = apiUrls[region];
       if (countryCodes.includes(region)) {
         if (!apiUrl) {
-          apiUrl = apiUrls.FALLBACK;
-          fallbackLogger.warn(`Region: ${region} is using fallback API URL.`);
+          apiUrl = apiUrls.IN;
+          fallbackLogger.warn(`Region: ${region} is using IN-EN API URL.`);
         }
       } else {
-        apiUrl = apiUrls.FALLBACK;
-        fallbackLogger.warn(`Region: ${region} is using fallback API URL.`);
+        apiUrl = apiUrls.IN;
+        fallbackLogger.warn(`Region: ${region} is using IN-EN API URL.`);
       }
 
       try {
