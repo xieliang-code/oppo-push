@@ -1,13 +1,3 @@
 node_modules
 package-lock.json
-logs/news-api-error-2024-11-01.log
-logs/news-api-info-2024-11-01.log
-logs/news-api-success-2024-11-01.log
-logs/news-api-empty-list-2024-11-01.log
-logs/news-api-fallback-2024-11-01.log
-logs/news-api-empty-list-2024-11-04.log
-logs/news-api-error-2024-11-04.log
-logs/news-api-fallback-2024-11-04.log
-logs/news-api-info-2024-11-04.log
-logs/news-api-request-2024-11-04.log
-logs/news-api-success-2024-11-04.log
+logs/
