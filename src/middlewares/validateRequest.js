@@ -65,13 +65,13 @@ const validateRequest = (req, res, next) => {
     return;
   }
 
-  const signature = generateSignature(
+  const sign = generateSignature(
     requestBody.source,
     requestBody.regions,
     requestBody.date
   );
 
-  if (requestBody.signature !== signature) {
+  if (requestBody.sign !== sign) {
     errorLogger.error("Invalid signature.");
     res.status(400).json({
       code: "400",
