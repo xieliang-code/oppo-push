@@ -13,6 +13,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok", message: "Service is running" });
+});
+
 app.use("/api", newsQueryRoute);
 
 app.listen(port, () => {

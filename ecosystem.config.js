@@ -12,7 +12,7 @@ module.exports = {
       env_production: {
         NODE_ENV: "production", // 生产环境变量
       },
-      log_date_format: "YYYY-MM-DD HH:mm Z", // 日志日期格式
+      log_date_format: "YYYY-MM-DD HH:mm Z", 
     },
   ],
 };
