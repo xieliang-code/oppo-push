@@ -17,7 +17,7 @@ app.get("/health", (req, res) => {
   res.status(200).json({ status: "ok", message: "Service is running" });
 });
 
-app.use("/api", newsQueryRoute);
+app.use(newsQueryRoute);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
