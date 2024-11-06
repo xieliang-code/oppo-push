@@ -86,9 +86,13 @@ const getNewsData = async (regions, date) => {
       }
 
       if (nonEmptyListPlacement) {
+        const regionData = countryCodes.find(
+          (codeObj) => codeObj.code === item.region
+        );
+        const language = regionData ? regionData.isoCode : "en";
         const dataForRegion = nonEmptyListPlacement.list.map((itemInner) => ({
           region: item.region,
-          language: item.region,
+          language: language,
           source: "Taboola",
           pushTitle: itemInner.name,
           pushSubTitle: itemInner.description,
