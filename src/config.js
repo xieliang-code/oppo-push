@@ -1,13 +1,15 @@
 module.exports = {
   countryCodes: [
-    { code: "IN", isoCode: "in" },
+    { code: "IN", isoCode: "en" },
+    { code: "HI", isoCode: "hi" },
     { code: "ID", isoCode: "id" },
-    { code: "MY", isoCode: "my" },
-    { code: "PH", isoCode: "ph" },
+    { code: "MY", isoCode: "ms" },
+    { code: "PH", isoCode: "en" },
     { code: "TH", isoCode: "th" },
   ],
   apiUrls: {
     IN: "https://api.taboola.com/2.0/json/oppo-browser-india-en-push/recommendations.get",
+    HI: "https://api.taboola.com/2.0/json/oppo-browser-india-hindi-push/recommendations.get",
     ID: "https://api.taboola.com/2.0/json/oppo-browser-indonesia-push/recommendations.get",
     MY: "https://api.taboola.com/2.0/json/oppo-browser-malaysia-push/recommendations.get",
     PH: "https://api.taboola.com/2.0/json/oppo-browser-philippine-push/recommendations.get",
