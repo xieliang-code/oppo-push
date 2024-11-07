@@ -43,7 +43,7 @@ const getNewsData = async (regions, date) => {
   const responses = await Promise.all(
     regions.map(async (region) => {
       let apiUrl = apiUrls[region];
-      if (countryCodes.includes(region)) {
+      if (countryCodes.some((country) => country.code === region)) {
         if (!apiUrl) {
           apiUrl = apiUrls.IN;
           fallbackLogger.warn(`Region: ${region} is using IN-EN API URL.`);
