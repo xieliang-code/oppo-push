@@ -58,13 +58,16 @@ const getNewsData = async (regions, date) => {
           ];
         }
 
-        let apiUrl = apiUrls[region];
-        if (!countryCodes.some((country) => country.code === region)) {
-          apiUrl = apiUrls.FALLBACK;
+        const regionData = countryCodes.find(
+          (country) => country.code === region
+        );
+        let apiUrl = apiUrls[region] || apiUrls.IN;
+        let language = regionData ? regionData.isoCode : "en";
+
+        if (!regionData) {
           fallbackLogger.warn(`Region: ${region} is using fallback API URL.`);
         }
-
-        return [{ region, apiUrl, language: "en" }];
+        return [{ region, apiUrl, language }];
       })
       .map(async ({ region, apiUrl, language }) => {
         try {
@@ -102,7 +105,7 @@ const getNewsData = async (regions, date) => {
       if (nonEmptyListPlacement) {
         const dataForRegion = nonEmptyListPlacement.list.map((itemInner) => ({
           region: item.region,
-          language: item.language,
+          language: item.language, // 确保 language 字段来自映射中的配置
           source: "Taboola",
           pushTitle: itemInner.name,
           pushSubTitle: itemInner.description,
