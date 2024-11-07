@@ -14,11 +14,19 @@ const getNewsData = async (regions, date) => {
         name: "Editorial Trending 01",
         recCount: "1",
         organicType: "MIX",
+        thumbnail: {
+          width: 296,
+          height: 114,
+        },
       },
       {
         name: "Editorial Breaking News",
         recCount: "1",
         organicType: "MIX",
+        thumbnail: {
+          width: 296,
+          height: 114,
+        },
       },
     ],
     user: {
@@ -41,33 +49,39 @@ const getNewsData = async (regions, date) => {
   };
 
   const responses = await Promise.all(
-    regions.map(async (region) => {
-      let apiUrl = apiUrls[region];
-      if (countryCodes.some((country) => country.code === region)) {
-        if (!apiUrl) {
-          apiUrl = apiUrls.IN;
-          fallbackLogger.warn(`Region: ${region} is using IN-EN API URL.`);
+    regions
+      .flatMap((region) => {
+        if (region === "IN") {
+          return [
+            { region, apiUrl: apiUrls.IN, language: "en" },
+            { region, apiUrl: apiUrls.HI, language: "hi" },
+          ];
         }
-      } else {
-        apiUrl = apiUrls.IN;
-        fallbackLogger.warn(`Region: ${region} is using IN-EN API URL.`);
-      }
 
-      try {
-        const response = await axios.post(apiUrl, body, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        return { response, region };
-      } catch (error) {
-        errorLogger.error(
-          `Error fetching data from API for region: ${region}. Date: ${date}`,
-          error
-        );
-        return null;
-      }
-    })
+        let apiUrl = apiUrls[region];
+        if (!countryCodes.some((country) => country.code === region)) {
+          apiUrl = apiUrls.FALLBACK;
+          fallbackLogger.warn(`Region: ${region} is using fallback API URL.`);
+        }
+
+        return [{ region, apiUrl, language: "en" }];
+      })
+      .map(async ({ region, apiUrl, language }) => {
+        try {
+          const response = await axios.post(apiUrl, body, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          return { response, region, language };
+        } catch (error) {
+          errorLogger.error(
+            `Error fetching data from API for region: ${region}. Date: ${date}`,
+            error
+          );
+          return null;
+        }
+      })
   );
 
   let formattedData = [];
@@ -86,13 +100,9 @@ const getNewsData = async (regions, date) => {
       }
 
       if (nonEmptyListPlacement) {
-        const regionData = countryCodes.find(
-          (codeObj) => codeObj.code === item.region
-        );
-        const language = regionData ? regionData.isoCode : "en";
         const dataForRegion = nonEmptyListPlacement.list.map((itemInner) => ({
           region: item.region,
-          language: language,
+          language: item.language,
           source: "Taboola",
           pushTitle: itemInner.name,
           pushSubTitle: itemInner.description,
