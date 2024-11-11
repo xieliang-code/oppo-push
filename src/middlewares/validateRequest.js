@@ -12,7 +12,7 @@ const validateRequest = (req, res, next) => {
   }
 
   const apiKey = req.headers["apikey"];
-  const validApiKey = "8f5JoVbbi50CkcgC0gG88Wo0S";
+  const validApiKey = "bbdedea82872c8c2f24ca23a64a159dc";
   if (apiKey !== validApiKey) {
     errorLogger.error("Invalid API key.");
     res.status(400).json({
