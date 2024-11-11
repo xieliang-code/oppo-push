@@ -1,5 +1,5 @@
 const generateSignature = require("../utils/signatureUtils.js");
-const { errorLogger } = require("../utils/logger");
+const { errorLogger, requestLogger } = require("../utils/logger");
 
 const validateRequest = (req, res, next) => {
   if (req.headers["content-type"] !== "application/json") {
@@ -22,7 +22,7 @@ const validateRequest = (req, res, next) => {
     return;
   }
   const requestid = req.headers["requestid"];
-  requestLogger.info( requestid);
+  requestLogger.info(requestid);
   if (!requestid) {
     errorLogger.error("Invalid requestId.");
     res.status(400).json({
