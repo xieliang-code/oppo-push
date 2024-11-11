@@ -18,5 +18,5 @@ module.exports = {
       "https://api.taboola.com/2.0/json/oppo-browser-fallback-push/recommendations.get",
   },
   apiSecret: "bbdedea82872c8c2f24ca23a64a159dc",
-  apiKey: "8f5JoVbbi50CkcgC0gG88Wo0S",
+  apiKey: "bbdedea82872c8c2f24ca23a64a159dc",
 };
