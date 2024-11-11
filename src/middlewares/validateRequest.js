@@ -22,7 +22,8 @@ const validateRequest = (req, res, next) => {
     return;
   }
   const requestid = req.headers["requestid"];
-  if (requestid !== "36eu298d10a00") {
+  requestLogger.info( requestid);
+  if (!requestid) {
     errorLogger.error("Invalid requestId.");
     res.status(400).json({
       code: "400",
