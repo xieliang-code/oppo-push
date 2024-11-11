@@ -2,15 +2,6 @@ const generateSignature = require("../utils/signatureUtils.js");
 const { errorLogger, requestLogger } = require("../utils/logger");
 
 const validateRequest = (req, res, next) => {
-  if (req.headers["content-type"] !== "application/json") {
-    errorLogger.error("Invalid Content-Type.");
-    res.status(400).json({
-      code: "400",
-      msg: "Invalid Content-Type",
-    });
-    return;
-  }
-
   const apiKey = req.headers["apikey"];
   const validApiKey = "bbdedea82872c8c2f24ca23a64a159dc";
   if (apiKey !== validApiKey) {
