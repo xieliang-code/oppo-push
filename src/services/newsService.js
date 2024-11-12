@@ -114,7 +114,7 @@ const getNewsData = async (regions, date) => {
           newsTag: itemInner.categories[0],
           newsTitle: itemInner.name,
           newsUrl: itemInner.url,
-          newsPublishTime: itemInner.created,
+          newsPublishTime: new Date(itemInner.created).getTime(),
           newsContentType: 1,
           newsType:
             nonEmptyListPlacement.name === "Editorial Trending 01"
