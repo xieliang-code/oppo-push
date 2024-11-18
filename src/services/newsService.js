@@ -1,4 +1,5 @@
 const axios = require("axios");
+const { v4: uuidv4 } = require("uuid");
 const constants = require("../config");
 const { countryCodes, apiUrls } = constants;
 const {
@@ -110,7 +111,7 @@ const getNewsData = async (regions, date) => {
           pushTitle: itemInner.name,
           pushSubTitle: itemInner.description,
           pushBannerUrl: itemInner.thumbnail[0].url,
-          newsId: itemInner.id,
+          newsId: uuidv4(),
           newsTag: itemInner.categories[0],
           newsTitle: itemInner.name,
           newsUrl: itemInner.url,
