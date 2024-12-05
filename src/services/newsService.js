@@ -106,7 +106,7 @@ const getNewsData = async (regions, date) => {
       if (nonEmptyListPlacement) {
         const dataForRegion = nonEmptyListPlacement.list.map((itemInner) => ({
           region: item.region,
-          language: item.language, // 确保 language 字段来自映射中的配置
+          language: item.language, 
           source: "Taboola",
           pushTitle: itemInner.name,
           pushSubTitle: itemInner.description,
