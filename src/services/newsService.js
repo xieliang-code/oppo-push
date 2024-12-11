@@ -62,7 +62,7 @@ const getNewsData = async (regions, date) => {
         const regionData = countryCodes.find(
           (country) => country.code === region
         );
-        let apiUrl = apiUrls[region] || apiUrls.IN;
+        let apiUrl = apiUrls[region] || apiUrls.FALLBACK;
         let language = regionData ? regionData.isoCode : "en";
 
         if (!regionData) {

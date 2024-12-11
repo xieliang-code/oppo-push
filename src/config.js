@@ -22,7 +22,7 @@ module.exports = {
     TH: 'https://api.taboola.com/2.0/json/oppo-browser-thailand-push/recommendations.get',
     TW: 'https://api.taboola.com/2.0/json/oppo-browser-tw-push/recommendations.get',
     AU: 'https://api.taboola.com/2.0/json/oppo-browser-au-push/recommendations.get',
-    NZL: 'https://api.taboola.com/2.0/json/oppo-browser-nzl-push/recommendations.get',
+    NZ: 'https://api.taboola.com/2.0/json/oppo-browser-nzl-push/recommendations.get',
     AR: 'https://api.taboola.com/2.0/json/oppo-browser-push-arabic/recommendations.get',
     ES: 'https://api.taboola.com/2.0/json/oppo-browser-push-spanish/recommendations.get',
     JP: 'https://api.taboola.com/2.0/json/oppo-browser-jp-push/recommendations.get',
