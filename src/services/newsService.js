@@ -1,29 +1,29 @@
-const axios = require("axios");
-const { v4: uuidv4 } = require("uuid");
-const constants = require("../config");
+const axios = require('axios');
+const { v4: uuidv4 } = require('uuid');
+const constants = require('../config');
 const { countryCodes, apiUrls } = constants;
 const {
   errorLogger,
   emptyListLogger,
   fallbackLogger,
-} = require("../utils/logger");
+} = require('../utils/logger');
 
 const getNewsData = async (regions, date) => {
   const body = {
     placements: [
       {
-        name: "Editorial Trending 01",
-        recCount: "1",
-        organicType: "MIX",
+        name: 'Editorial Trending 01',
+        recCount: '1',
+        organicType: 'MIX',
         thumbnail: {
           width: 296,
           height: 114,
         },
       },
       {
-        name: "Editorial Breaking News",
-        recCount: "1",
-        organicType: "MIX",
+        name: 'Editorial Breaking News',
+        recCount: '1',
+        organicType: 'MIX',
         thumbnail: {
           width: 296,
           height: 114,
@@ -31,31 +31,34 @@ const getNewsData = async (regions, date) => {
       },
     ],
     user: {
-      session: "init",
-      realip: "2.255.252.23",
-      agent: "oppo-push",
-      device: "2.255.252.23",
+      session: 'init',
+      realip: '2.255.252.23',
+      agent: 'oppo-push',
+      device: '2.255.252.23',
     },
     app: {
-      type: "mobile",
-      apiKey: "3f86e4f486f744261a8cb01ff3c8731861234b63",
-      origin: "SERVER",
+      type: 'mobile',
+      apiKey: '3f86e4f486f744261a8cb01ff3c8731861234b63',
+      origin: 'SERVER',
       consent: {},
     },
     source: {
-      type: "text",
-      id: "oppo-push",
-      url: "oppo-push",
+      type: 'text',
+      id: 'oppo-push',
+      url: 'oppo-push',
+    },
+    view: {
+      id: uuidv4(),
     },
   };
 
   const responses = await Promise.all(
     regions
       .flatMap((region) => {
-        if (region === "IN") {
+        if (region === 'IN') {
           return [
-            { region, apiUrl: apiUrls.IN, language: "en" },
-            { region, apiUrl: apiUrls.HI, language: "hi" },
+            { region, apiUrl: apiUrls.IN, language: 'en' },
+            { region, apiUrl: apiUrls.HI, language: 'hi' },
           ];
         }
 
@@ -63,7 +66,7 @@ const getNewsData = async (regions, date) => {
           (country) => country.code === region
         );
         let apiUrl = apiUrls[region] || apiUrls.FALLBACK;
-        let language = regionData ? regionData.isoCode : "en";
+        let language = regionData ? regionData.isoCode : 'en';
 
         if (!regionData) {
           fallbackLogger.warn(`Region: ${region} is using fallback API URL.`);
@@ -74,7 +77,7 @@ const getNewsData = async (regions, date) => {
         try {
           const response = await axios.post(apiUrl, body, {
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
             },
           });
           return { response, region, language };
@@ -106,21 +109,21 @@ const getNewsData = async (regions, date) => {
       if (nonEmptyListPlacement) {
         const dataForRegion = nonEmptyListPlacement.list.map((itemInner) => ({
           region: item.region,
-          language: item.language, 
-          source: "Taboola",
+          language: item.language,
+          source: 'Taboola',
           pushTitle: itemInner.name,
           pushSubTitle: itemInner.description,
           pushBannerUrl: itemInner.thumbnail[0].url,
-          newsId: uuidv4(),
+          newsId: itemInner.id.substring(0, 27),
           newsTag: itemInner.categories[0],
           newsTitle: itemInner.name,
           newsUrl: itemInner.url,
           newsPublishTime: new Date(itemInner.created).getTime(),
           newsContentType: 1,
           newsType:
-            nonEmptyListPlacement.name === "Editorial Trending 01"
+            nonEmptyListPlacement.name === 'Editorial Trending 01'
               ? 0
-              : nonEmptyListPlacement.name === "Editorial Breaking News"
+              : nonEmptyListPlacement.name === 'Editorial Breaking News'
               ? 1
               : null,
         }));
@@ -132,8 +135,8 @@ const getNewsData = async (regions, date) => {
   return formattedData.length > 0
     ? formattedData
     : {
-        code: "500",
-        msg: "Internal server error. No valid news data retrieved.",
+        code: '500',
+        msg: 'Internal server error. No valid news data retrieved.',
         data: [],
       };
 };
