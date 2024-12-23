@@ -1,5 +1,4 @@
 const axios = require('axios');
-const { v4: uuidv4 } = require('uuid');
 const constants = require('../config');
 const { countryCodes, apiUrls } = constants;
 const {
@@ -7,6 +6,11 @@ const {
   emptyListLogger,
   fallbackLogger,
 } = require('../utils/logger');
+
+function getHourlyTimestamp() {
+  const currentHourTimestamp = new Date(new Date().setMinutes(0, 0, 0)).getTime();
+  return currentHourTimestamp.toString();
+}
 
 const getNewsData = async (regions, date) => {
   const body = {
@@ -48,7 +52,7 @@ const getNewsData = async (regions, date) => {
       url: 'oppo-push',
     },
     view: {
-      id: uuidv4(),
+      id: getHourlyTimestamp(),
     },
   };
 
